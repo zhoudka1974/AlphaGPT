@@ -18,6 +18,11 @@ class NewtonSchulzLowRankDecay:
         decay_rate: Strength of low-rank decay
         num_iterations: Number of Newton-Schulz iterations (default: 5)
         target_keywords: If specified, only decay parameters matching these keywords
+
+    名为 AlphaGPT 的神经网络模型,专为自动生成交易策略公式(如量化因子) 而设计。
+        它结合了多种先进架构技术(如 Looped Transformer、QK-Norm、SwiGLU、MTP Head 等),
+        并引入了低秩正则化(LoRD) 和稳定秩监控机制,
+        以提升模型在小样本、高噪声金融数据上的泛化能力
     """
     def __init__(self, named_parameters, decay_rate=1e-3, num_iterations=5, target_keywords=None):
         self.decay_rate = decay_rate
