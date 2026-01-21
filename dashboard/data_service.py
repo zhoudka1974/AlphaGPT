@@ -22,7 +22,7 @@ class DashboardService:
     def _get_wallet_address(self):
         try:
             from solders.keypair import Keypair
-            pk_str = os.getenv("SOLANA_PRIVATE_KEY", "")
+            pk_str = os.getenv("SOLANA_PRIVATE_KEY", "") # 这是通过solana-keygen new 生成的
             if "[" in pk_str:
                 kp = Keypair.from_bytes(json.loads(pk_str))
             else:
