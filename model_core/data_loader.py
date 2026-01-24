@@ -6,12 +6,14 @@ from .factors import FeatureEngineer
 
 class CryptoDataLoader:
     def __init__(self):
+        import ipdb; ipdb.set_trace() 
         self.engine = sqlalchemy.create_engine(ModelConfig.DB_URL)
         self.feat_tensor = None
         self.raw_data_cache = None
         self.target_ret = None
         
     def load_data(self, limit_tokens=500):
+        import ipdb; ipdb.set_trace() 
         print("Loading data from SQL...")
         top_query = f"""
         SELECT address FROM tokens 
@@ -29,7 +31,7 @@ class CryptoDataLoader:
         df = pd.read_sql(data_query, self.engine)
         def to_tensor(col):
             pivot = df.pivot(index='time', columns='address', values=col)
-            pivot = pivot.fillna(method='ffill').fillna(0.0)
+            pivot = pivot.fillna(0.0)
             return torch.tensor(pivot.values.T, dtype=torch.float32, device=ModelConfig.DEVICE)
         self.raw_data_cache = {
             'open': to_tensor('open'),

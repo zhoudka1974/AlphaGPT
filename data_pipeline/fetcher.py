@@ -11,7 +11,7 @@ class BirdeyeFetcher:
             "X-API-KEY": Config.BIRDEYE_API_KEY,
             "accept": "application/json"
         }
-        self.semaphore = asyncio.Semaphore(5)
+        self.semaphore = asyncio.Semaphore(2)
 
     async def get_trending_tokens(self, limit=100):
         url = f"{Config.BASE_URL}/defi/token_trending?sort_by=rank&sort_type=asc&offset=0&limit={limit}"

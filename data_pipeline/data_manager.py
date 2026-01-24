@@ -21,7 +21,7 @@ class DataManager:
 
     async def pipeline_sync_daily(self):
         logger.info("Step 1: Discovering trending tokens...")
-        limit = 500 if Config.BIRDEYE_IS_PAID else 100
+        limit = 500 if Config.BIRDEYE_IS_PAID else 20
         candidates = await self.birdeye.get_trending_tokens(limit=limit)
         
         logger.info(f"Raw candidates found: {len(candidates)}")

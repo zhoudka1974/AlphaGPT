@@ -153,5 +153,7 @@ class AlphaEngine:
 
 
 if __name__ == "__main__":
+    import ipdb
+    ipdb.set_trace()
     eng = AlphaEngine(use_lord_regularization=True)
     eng.train()

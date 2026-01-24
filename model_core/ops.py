@@ -57,13 +57,11 @@ def _op_decay(x: torch.Tensor) -> torch.Tensor:
     return x + 0.8 * _ts_delay(x, 1) + 0.6 * _ts_delay(x, 2)
 
 OPS_CONFIG = [
-    """
-        这是一个 操作原语库(primitive set),每个元素是三元组 (name, function, arity):
-        字段	含义
-        name	操作名称(字符串标识)
-        function	可调用的函数(lambda 或 JIT 函数)
-        arity	所需输入参数个数(1=一元,2=二元,3=三元)
-    """
+    #    这是一个 操作原语库(primitive set),每个元素是三元组 (name, function, arity):
+    #    字段	含义
+    #    name	操作名称(字符串标识)
+    #    function	可调用的函数(lambda 或 JIT 函数)
+    #    arity	所需输入参数个数(1=一元,2=二元,3=三元)
     ('ADD', lambda x, y: x + y, 2),
     ('SUB', lambda x, y: x - y, 2),
     ('MUL', lambda x, y: x * y, 2),

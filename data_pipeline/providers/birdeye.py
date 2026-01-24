@@ -10,7 +10,8 @@ class BirdeyeProvider(DataProvider):
         self.base_url = "https://public-api.birdeye.so"
         self.headers = {
             "X-API-KEY": Config.BIRDEYE_API_KEY,
-            "accept": "application/json"
+            "accept": "application/json",
+            "x-chain": "solana"
         }
         self.semaphore = asyncio.Semaphore(Config.CONCURRENCY)
         
@@ -18,14 +19,21 @@ class BirdeyeProvider(DataProvider):
         url = f"{self.base_url}/defi/token_trending"
         params = {
             "sort_by": "rank",
+            "interval" :"24h",
             "sort_type": "asc",
             "offset": "0",
+            "ui_amount_mode": "scaled",
             "limit": str(limit)
         }
         
         async with aiohttp.ClientSession(headers=self.headers) as session:
             try:
                 async with session.get(url, params=params) as resp:
+
+                    raw_text = await resp.text()
+
+                    print(f"Raw Response: {raw_text}") # 具体错误原因
+
                     if resp.status == 200:
                         data = await resp.json()
                         raw_list = data.get('data', {}).get('tokens', [])
@@ -42,7 +50,7 @@ class BirdeyeProvider(DataProvider):
                             })
                         return results
                     else:
-                        logger.error(f"Birdeye Trending Error: {resp.status}")
+                        logger.error(f"Birdeye Trending Error: {resp.status},Response:{raw_text}")
                         return []
             except Exception as e:
                 logger.error(f"Birdeye Trending Exception: {e}")
@@ -85,7 +93,7 @@ class BirdeyeProvider(DataProvider):
                         return formatted
                     elif resp.status == 429:
                         logger.warning(f"Birdeye 429 for {address}, retrying...")
-                        await asyncio.sleep(2)
+                        await asyncio.sleep(20)
                         return await self.get_token_history(session, address, days)
                     else:
                         return []

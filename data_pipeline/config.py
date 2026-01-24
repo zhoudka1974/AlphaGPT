@@ -16,7 +16,7 @@ class Config:
     MIN_FDV = 10000000.0            
     MAX_FDV = float('inf') 
     BIRDEYE_API_KEY = os.getenv("BIRDEYE_API_KEY", "")
-    BIRDEYE_IS_PAID = True
+    BIRDEYE_IS_PAID = False
     USE_DEXSCREENER = False
     CONCURRENCY = 20
     HISTORY_DAYS = 7
