@@ -6,14 +6,12 @@ from .factors import FeatureEngineer
 
 class CryptoDataLoader:
     def __init__(self):
-        import ipdb; ipdb.set_trace() 
         self.engine = sqlalchemy.create_engine(ModelConfig.DB_URL)
         self.feat_tensor = None
         self.raw_data_cache = None
         self.target_ret = None
         
     def load_data(self, limit_tokens=500):
-        import ipdb; ipdb.set_trace() 
         print("Loading data from SQL...")
         top_query = f"""
         SELECT address FROM tokens 
