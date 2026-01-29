@@ -13,7 +13,9 @@ def _ts_delay(x: torch.Tensor, d: int) -> torch.Tensor:
     """
     if d == 0: return x
     pad = torch.zeros((x.shape[0], d), device=x.device)
-    return torch.cat([pad, x[:, :-d]], dim=1)
+    result = torch.cat([pad, x[:, :-d]], dim=1)
+    # import ipdb ; ipdb.set_trace()
+    return result
 
 @torch.jit.script
 def _op_gate(condition: torch.Tensor, x: torch.Tensor, y: torch.Tensor) -> torch.Tensor:
