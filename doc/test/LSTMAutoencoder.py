@@ -75,7 +75,7 @@ class LSTMAutoencoder(nn.Module):
         
         return recon_x
     
-    import torch
+import torch
 import numpy as np
 
 # Simulate 1000 sequences of 50-timestep CPU usage (normal + some anomalies)
