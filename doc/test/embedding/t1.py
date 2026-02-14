@@ -7,7 +7,6 @@ class PositionalEncoding(nn.Module):
     位置编码模块：为输入序列添加位置信息
     使用正弦和余弦函数生成位置编码
     """
-
     def __init__(self, max_pos: int, embed_dim: int):
         super(PositionalEncoding, self).__init__()
         
@@ -46,11 +45,15 @@ if __name__ == "__main__":
     max_pos = 10      # 最大序列长度
     embed_dim = 4     # 词向量维度
 
+    values = nn.Linear(12,16)
+
     # 定义位置编码模型
     model = PositionalEncoding(max_pos, embed_dim)
 
-    # 输入数据：2个样本，每个样本长度为max_pos = 10，每个维度是embed_dim=4
-    x = torch.zeros(2, 5, embed_dim)  # 形状: (batch_size, seq_len, embed_dim)
+    # 输入数据：2个样本，每个样本长度为5，每个维度是embed_dim=4
+    x = torch.zeros(2, 5, 12)  # 形状: (batch_size, seq_len, embed_dim)
+
+    values_out = values(x)
 
     # 将x传入模型，计算添加位置信息的结果output
     output = model(x)
